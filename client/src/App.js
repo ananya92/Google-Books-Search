@@ -1,17 +1,24 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { Layout, Header, Navigation, Content} from 'react-mdl';
+import NavTabs from "./components/navTabs";
+import {Link} from 'react-router-dom';
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <div className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to React</h2>
-      </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
+      <div className="demo-big-content">
+        <Layout fixedHeader>
+            <Header title={<a href="/" className="styleTitle">Google Books</a>} className="header-gradient" scroll>
+                <Navigation id="linkTabs">
+                    <Link to="/search">Search</Link>
+                    <Link to="/saved">Saved</Link>
+                </Navigation>
+            </Header>
+            <Content>
+                <div className="page-content" />
+                <NavTabs></NavTabs>
+            </Content>
+        </Layout>
     </div>
   );
 }
