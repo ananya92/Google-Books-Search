@@ -17,3 +17,25 @@
   font-size: large;
   margin-top: -10px;
 }
+
+.styleForm button{
+  float: left;
+  padding: 6px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+.styleForm input {
+  float:left;
+  width: 50%;
+  font-size: 14px;
+  padding: 6px;
+  margin-right: 5px;
+}
+
+.styleRow {
+  overflow: auto;
+  border: 2px solid rgb(20,129,211);
+  margin: 20px;
+  padding: 20px;
+}
