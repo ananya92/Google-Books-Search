@@ -34,8 +34,23 @@
 }
 
 .styleRow {
-  overflow: auto;
   border: 2px solid rgb(20,129,211);
   margin: 20px;
   padding: 20px;
+  overflow: auto;
+}
+.styleBook {
+  border-bottom: 2px solid rgb(20,129,211);
+  padding: 0 20px;
+}
+
+.styleImage {
+  width: 128px;
+  height: auto;
+  margin: 0 20px 20px 0;
+  float: left;
+}
+
+.styleGrid {
+  overflow: auto;
 }
