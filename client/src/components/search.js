@@ -5,7 +5,9 @@ import Favorite from "./favorite";
 function Search() {
     const searchRef = useRef();
     const [searchedBooks, setSearchedBooks] = useState({
-        books: []
+        books: [],
+        errorMsg: "",
+        isSearching: false
     });
 
     const handleSubmit = e => {
@@ -13,25 +15,23 @@ function Search() {
         searchBooks();
     };
 
-    useEffect(()=>{
-        searchRef.current.value = "Harry Potter";
-        searchBooks();
-
-    },[]);
-
     function searchBooks() {
+        setSearchedBooks({...searchedBooks, errorMsg: "", isSearching: true});
         API.getBooks(searchRef.current.value)
         .then(result => {
+            setSearchedBooks({...searchedBooks, isSearching: false});
+            console.log(result.data);
             if(result.data.totalItems === 0)
-                setSearchedBooks({books: []});
+                setSearchedBooks({...searchedBooks, books: [], errorMsg: "No search results found"});
             else {
                 var resultBooks = [];
                 for(var i=0; i<result.data.items.length; i++) {
                     var book = result.data.items[i];
                     var desc = book.volumeInfo.description !== undefined ? book.volumeInfo.description : "";
                     var imageSrc = book.volumeInfo.imageLinks !== undefined ? book.volumeInfo.imageLinks.smallThumbnail : "default.png";
+                    var authors = book.volumeInfo.authors !== undefined ? book.volumeInfo.authors : ["NA"];
                     var searchedBook = {
-                        authors: book.volumeInfo.authors,
+                        authors: authors,
                         description: desc,
                         image: imageSrc,
                         link: book.volumeInfo.infoLink,
@@ -39,7 +39,7 @@ function Search() {
                     }
                     resultBooks.push(searchedBook);
                 }
-                setSearchedBooks({books: resultBooks});
+                setSearchedBooks({...searchedBooks, books: resultBooks});
             }
                 
         })
@@ -59,12 +59,14 @@ function Search() {
                             <button
                             type="submit"
                             >Search</button>
+                            <div className={searchedBooks.isSearching ? "loader" : ""}></div>
                     </form>   
                     </Col>            
                 </Row>
-                <Row className="styleRow">
+                
                     {searchedBooks.books.length ? (
-                        searchedBooks.books.map(book => (
+                        <Row className="styleRow">
+                        {searchedBooks.books.map(book => (
                             <Col className="styleBook">
                                 <h5>{book.title}</h5>
                                 <Favorite book={book} search={searchRef.current.value}></Favorite>
@@ -79,11 +81,16 @@ function Search() {
                                     <a href={book.link} target="_blank">Read more</a>
                                 </button>
                             </Col>
-                        ))
+                        ))}
+                        </Row>
                     ) : (
-                        <h6>No search results found!</h6>
+                            (searchedBooks.errorMsg !== "") ? 
+                            <Row className="styleRow">
+                            <h6>{searchedBooks.errorMsg}</h6> 
+                            </Row>
+                            : ""      
                     )}
-                </Row>
+                
             </Container>
         </div>
     )
