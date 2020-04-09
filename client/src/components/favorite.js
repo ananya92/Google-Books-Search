@@ -8,7 +8,7 @@ function favorite(props) {
     });
     const [isFavoriteBook, setIsFavoriteBook] = useState({
         isFavorite: false
-    })
+    });
     const [userfavBooks, setUserfavBooks] = useState({
         favBooks: []
     });
