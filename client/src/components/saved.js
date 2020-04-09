@@ -3,19 +3,22 @@ import { Container, Row, Col } from 'react-bootstrap';
 import API from "../utils/API";
 
 function Saved() {
+    // Saving the list of user's favorite books for rendering on screen
     const [userfavBooks, setUserfavBooks] = useState({
         favBooks: []
     });
-
+    // On page load, read all user's favorite books from the database
     useEffect(()=>{
         API.getFavBooks().then(result => {
             setUserfavBooks({favBooks: result.data});
         })
         .catch(err => console.log(err));
     },[]);
+    // Function to handle deletion of a book from the favorites
     const handleRemove = (id) => {
         API.deleteBook(id)
         .then(result => {
+            // Updating the state of the favBooks list after deleting the book
             setUserfavBooks(state => {
                 const list = state.favBooks.filter(favBook => (favBook.title !== result.data.title && favBook.authors.join() !== result.data.authors.join() && favBook.description !== result.data.description));
                 return {
