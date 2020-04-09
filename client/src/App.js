@@ -10,16 +10,16 @@ function App() {
       <div className="demo-big-content">
         <Layout fixedHeader>
             <Header title={<a href="/" className="styleTitle">Google Books</a>} className="header-gradient" scroll>
-                <Navigation id="linkTabs">
-                    <Link to="/search">Search</Link>
-                    <Link to="/saved">Saved</Link>
+                <Navigation>
+                    <Link className="linkTabs" to="/search">Search</Link>
+                    <Link className="linkTabs" to="/saved">Favorites</Link>
                 </Navigation>
             </Header>
             <Jumbotron>
                 <div className="alignCenter">
                     <h3>Google Books Search</h3>
                     <p>
-                        Search and save books of interest!
+                        Search and save books you love!
                     </p>
                 </div>
                 </Jumbotron>
