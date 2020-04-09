@@ -4,6 +4,7 @@ import API from "../utils/API";
 import Favorite from "./favorite";
 function Search() {
     const searchRef = useRef();
+    // Storing the state of the searched books, the error msg if no search results are found and the isSearching state to indicate the waiting period when results are being fetched
     const [searchedBooks, setSearchedBooks] = useState({
         books: [],
         errorMsg: "",
@@ -14,16 +15,20 @@ function Search() {
         e.preventDefault();
         searchBooks();
     };
-
+    // Function to get the search results from the Google Books API on the search key entered by user
     function searchBooks() {
+        // Setting the isSearching state to true so that the loader icon starts rendering on screen
         setSearchedBooks({...searchedBooks, errorMsg: "", isSearching: true});
         API.getBooks(searchRef.current.value)
         .then(result => {
+            // Setting the isSearching state to false to stop the loader icon from rendering as the search results have been returned from the API
             setSearchedBooks({...searchedBooks, isSearching: false});
             console.log(result.data);
+            // Set the error message if no search results are returned
             if(result.data.totalItems === 0)
                 setSearchedBooks({...searchedBooks, books: [], errorMsg: "No search results found"});
             else {
+                // Retrieve the book information from the API result for populating on screen
                 var resultBooks = [];
                 for(var i=0; i<result.data.items.length; i++) {
                     var book = result.data.items[i];
@@ -39,6 +44,7 @@ function Search() {
                     }
                     resultBooks.push(searchedBook);
                 }
+                //Set the list of searched books to the searchedBooks state which will be rendered on the screen
                 setSearchedBooks({...searchedBooks, books: resultBooks});
             }
                 
