@@ -4,11 +4,11 @@ React-based Google Books Search is an app to search for books using Google Books
 It is a MERN stack application using React as front-end with an Express server storing the user's favorite books in a Mongo database.
 
 When the user loads the Google Books Search App, they can -
-   * "Search for a book" - This invokes the Google Books API and renders the search results on the screen. 
-   * "View a book" - The 'Read More' button brings the user to the book on Google Books.
-   * "Save a book" - Clicking on the &#xf08a; button saves the book to the Mongo database.
-   * "View Favorites" - Renders all favorite books saved in the Mongo database. 
-   * "Delete a book" - Removes the book from the favorites database.
+   * __Search for a book__ - This invokes the Google Books API and renders the search results on the screen. 
+   * __View a book__ - The 'Read More' button brings the user to the book on Google Books.
+   * __Save a book__ - Clicking on the :heart: button saves the book to the favorite books in Mongo database.
+   * __View Favorites__ - Displays all favorite books saved in the favorites database. 
+   * __Delete from favorites__ - Removes the book from the favorites database.
 
 ## User Story
 
@@ -17,7 +17,7 @@ When the user loads the Google Books Search App, they can -
 ## Technologies Used
 
  * React
- * Node and Express server
+ * Node & Express server
  * Mongodb using Mongoose 
  * Deployed on Heroku
 
