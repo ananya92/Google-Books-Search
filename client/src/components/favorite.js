@@ -37,8 +37,20 @@ function favorite(props) {
             var isFavorite = false;
             for(var i=0; i< userfavBooks.favBooks.length; i++) {
                 if(userfavBooks.favBooks[i].authors.join() === book.authors.join() && userfavBooks.favBooks[i].title === book.title && userfavBooks.favBooks[i].description === book.description) {
-                    console.log("Book is already a favorite");
                     isFavorite = true;
+                    // The book is already and the favorite button has been clicked, hence removing it from favorites
+                    API.deleteBook(userfavBooks.favBooks[i]._id)
+                    .then(result => {
+                        console.log("Removed from favortites:" + book.title);
+                        setUserfavBooks(state => {
+                            const list = state.favBooks.filter(favBook => (favBook.title !== book.title && favBook.authors.join() !== book.authors.join() && favBook.description !== book.description));
+                            return {
+                                favBooks: list
+                            };
+                          });
+                        setIsFavoriteBook({isFavorite: false});
+                    })
+                    .catch(err => console.log(err));
                     break;
                 }
             }
@@ -51,7 +63,6 @@ function favorite(props) {
                     title: book.title,
                 })
                 .then(result => {
-                    console.log(result.data);
                     setUserfavBooks(state => {
                         const list = state.favBooks.concat(result.data);
                         return {
