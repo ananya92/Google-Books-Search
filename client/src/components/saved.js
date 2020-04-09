@@ -14,7 +14,16 @@ function Saved() {
         .catch(err => console.log(err));
     },[]);
     const handleRemove = (id) => {
-        
+        API.deleteBook(id)
+        .then(result => {
+            setUserfavBooks(state => {
+                const list = state.favBooks.filter(favBook => (favBook.title !== result.data.title && favBook.authors.join() !== result.data.authors.join() && favBook.description !== result.data.description));
+                return {
+                    favBooks: list
+                };
+            });
+        })
+        .catch(err => console.log(err));
     }
 
     return(
