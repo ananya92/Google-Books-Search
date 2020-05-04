@@ -24,3 +24,8 @@ When the user loads the Google Books Search App, they can -
 ## Deployed Application URL 
 
 https://fav-books-app.herokuapp.com/
+
+## Application Screenshot
+![Project Snapshot](https://github.com/ananya92/My-Portfolio/blob/master/src/components/projects/img/pr3_1.PNG)
+***
+![Project Snapshot](https://github.com/ananya92/My-Portfolio/blob/master/src/components/projects/img/pr3_2.PNG)
